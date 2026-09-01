@@ -2,6 +2,7 @@ package com.back.p67260811.domain.service;
 
 import com.back.p67260811.domain.member.Member;
 import com.back.p67260811.domain.repository.MemberRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,9 @@ public class MemberService {
         Member member = new Member(username, password, nickname);
         return memberRepository.save(member);
     }
+
+    public Optional<Member> findByUsername(String username) {
+        return memberRepository.findByUsername(username);
+    }
+
 }
