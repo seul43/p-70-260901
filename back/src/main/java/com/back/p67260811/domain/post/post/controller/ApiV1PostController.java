@@ -6,6 +6,7 @@ import com.back.p67260811.domain.post.post.entity.Post;
 import com.back.p67260811.domain.post.post.service.PostService;
 import com.back.p67260811.domain.service.MemberService;
 import com.back.p67260811.global.dto.RsData;
+import com.back.p67260811.global.exception.ServiceException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -48,11 +49,11 @@ public class ApiV1PostController {
 
 
     record PostWriteReqBody(
-            @Size(min = 2, max = 10, message = "제목은 2글자 이상 10글자 이하로 작성해주세요.")
+            @Size(min = 2, max = 20, message = "제목은 2글자 이상 10글자 이하로 작성해주세요.")
             @NotBlank(message = "제목을 입력해주세요.")
             String title,
 
-            @Size(min = 2, max = 10, message = "내용은 2글자 이상 10글자 이하로 작성해주세요.")
+            @Size(min = 2, max = 50, message = "내용은 2글자 이상 10글자 이하로 작성해주세요.")
             @NotBlank(message = "내용을 입력해주세요.")
             String content
     ) {
@@ -61,10 +62,17 @@ public class ApiV1PostController {
     @PostMapping
     @Transactional
     public RsData<PostDto> write(
-            @Valid @RequestBody PostWriteReqBody reqBody
+            @Valid @RequestBody PostWriteReqBody reqBody,
+            @RequestParam String username,
+            @RequestParam String password
     ) {
 
-        Member actor = memberService.findByUsername("user1").get();
+        Member actor = memberService.findByUsername(username).get();
+
+        if(!actor.getPassword().equals(password)){
+            throw new ServiceException("401-1","비밀번호 불일치");
+        }
+
 
         Post post = postService.write(actor, reqBody.title, reqBody.content);
         return new RsData<>(
@@ -76,10 +84,10 @@ public class ApiV1PostController {
 
 
     record PostModifyReqBody(
-            @Size(min = 2, max = 10, message = "제목은 2글자 이상 10글자 이하로 작성해주세요.")
+            @Size(min = 2, max = 20, message = "제목은 2글자 이상 20글자 이하로 작성해주세요.")
             @NotBlank(message = "제목을 입력해주세요.")
             String title,
-            @Size(min = 2, max = 10, message = "내용은 2글자 이상 10글자 이하로 작성해주세요.")
+            @Size(min = 2, max =50, message = "내용은 2글자 이상 50글자 이하로 작성해주세요.")
             @NotBlank(message = "내용을 입력해주세요.")
             String content
     ) {

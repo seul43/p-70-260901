@@ -1,0 +1,5 @@
+$kind: http-request
+name: 글 수정
+url: ""
+method: PATCH
+order: 4428958578103743
