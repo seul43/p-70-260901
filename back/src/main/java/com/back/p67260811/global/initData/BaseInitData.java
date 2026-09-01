@@ -20,15 +20,18 @@ public class BaseInitData {
     @Lazy
     private BaseInitData self;
     private final PostService postService;
+    private final MemberService memberService;
+
     @Bean
     ApplicationRunner initDataRunner() {
         return args -> {
             self.work1();
+            self.work2();
         };
     }
 
     @Transactional
-    public void work1() {
+    public void work2() {
         if (postService.count() > 0) {
             return;
         }
@@ -42,5 +45,19 @@ public class BaseInitData {
         post1.addComment("댓글 1-3");
         post2.addComment("댓글 2-1");
         post2.addComment("댓글 2-2");
+    }
+
+    @Transactional
+    public void work1() {
+        if (memberService.count() > 0) {
+            return;
+        }
+
+        memberService.join("system", "system", "시스템");
+        memberService.join("admin", "admin", "운영자");
+        memberService.join("user1", "1234", "유저1");
+        memberService.join("user2", "1234", "유저2");
+        memberService.join("user3", "1234", "유저3");
+
     }
 }
