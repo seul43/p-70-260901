@@ -2,6 +2,7 @@ package com.back.p67260811.global.initData;
 
 import com.back.p67260811.domain.post.post.entity.Post;
 import com.back.p67260811.domain.post.post.service.PostService;
+import com.back.p67260811.domain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -41,5 +43,4 @@ public class BaseInitData {
         post2.addComment("댓글 2-1");
         post2.addComment("댓글 2-2");
     }
-
 }
