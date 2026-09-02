@@ -1,0 +1,13 @@
+$kind: http-request
+name: 회원 가입
+url: http://localhost:8080/api/v1/members
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "username" : "new user",
+        "password" : "1234",
+        "nickname" : "뚱이"
+    }
+order: 1788307642054
