@@ -3,7 +3,7 @@ name: 글 작성
 url: "{{baseUrl}}/api/v1/posts"
 method: POST
 headers:
-  Authorization: "{{apiKey}}"
+  Authorization: Bearer {{apiKey}}
 body:
   type: json
   content: |-

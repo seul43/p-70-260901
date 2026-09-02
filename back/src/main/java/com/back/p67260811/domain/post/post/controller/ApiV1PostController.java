@@ -66,6 +66,8 @@ public class ApiV1PostController {
         @RequestHeader("Authorization") String apiKey
     ) {
 
+        String authorization = apiKey.substring(7);
+
         Member actor = memberService.findByApiKey(apiKey).orElseThrow(
             () -> new ServiceException("401-1","API Key가 유효하지 않습니다.")
         );
