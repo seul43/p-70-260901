@@ -1,6 +1,6 @@
 package com.back.p67260811.domain.member.dto;
 
-import com.back.p67260811.domain.member.Member;
+import com.back.p67260811.domain.member.entity.Member;
 import java.time.LocalDateTime;
 
 public record MemberDto(

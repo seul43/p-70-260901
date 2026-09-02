@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(SecurityException.class)
+    @ExceptionHandler(ServiceException.class)
     @ResponseBody
     public RsData<Void> handleException(ServiceException e) {
         return new RsData<>(

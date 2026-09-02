@@ -1,6 +1,6 @@
 package com.back.p67260811.global.initData;
 
-import com.back.p67260811.domain.member.Member;
+import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.post.post.entity.Post;
 import com.back.p67260811.domain.post.post.service.PostService;
 import com.back.p67260811.domain.member.service.MemberService;

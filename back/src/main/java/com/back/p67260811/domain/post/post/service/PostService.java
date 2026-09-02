@@ -1,6 +1,6 @@
 package com.back.p67260811.domain.post.post.service;
 
-import com.back.p67260811.domain.member.Member;
+import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.post.comment.entity.PostComment;
 import com.back.p67260811.domain.post.post.entity.Post;
 import com.back.p67260811.domain.post.post.repository.PostRepository;

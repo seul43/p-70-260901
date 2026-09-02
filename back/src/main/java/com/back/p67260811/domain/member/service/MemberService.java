@@ -1,6 +1,6 @@
 package com.back.p67260811.domain.member.service;
 
-import com.back.p67260811.domain.member.Member;
+import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.member.repository.MemberRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
