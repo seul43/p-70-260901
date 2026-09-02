@@ -1,2 +1,5 @@
 $kind: collection
 name: rest1
+variables:
+  apiKey: ""
+  baseUrl: ""

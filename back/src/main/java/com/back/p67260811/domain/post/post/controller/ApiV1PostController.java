@@ -63,7 +63,7 @@ public class ApiV1PostController {
     @Transactional
     public RsData<PostDto> write(
         @Valid @RequestBody PostWriteReqBody reqBody,
-        @RequestParam String apiKey
+        @RequestHeader("Authorization") String apiKey
     ) {
 
         Member actor = memberService.findByApiKey(apiKey).orElseThrow(

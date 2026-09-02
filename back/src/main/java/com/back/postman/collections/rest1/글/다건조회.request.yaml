@@ -1,4 +1,5 @@
 $kind: http-request
-url: ""
+name: 다건조회
+url: "{{baseUrl}}"
 method: GET
 order: 1788227918310

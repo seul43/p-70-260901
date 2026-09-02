@@ -1,0 +1,24 @@
+$kind: http-request
+name: 로그인
+url: "{{baseUrl}}/api/v1/members/login"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "username" : "new user1",
+        "password" : "1234"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const apiKey = pm.response.json()?.data?.apiKey;
+
+      if (apiKey) {
+          pm.collectionVariables.set("apiKey", apiKey);
+          console.log(`apiKey 교체 : ${apiKey}`);
+      } else {
+          console.warn("apiKey가 응답에 없습니다.");
+      }
+    language: text/javascript
+order: 1508739963736485

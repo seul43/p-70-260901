@@ -20,7 +20,6 @@ public class MemberService {
     }
 
     public Member join(String username, String password, String nickname) {
-
         findByUsername(username).ifPresent(m -> {
             throw new ServiceException("409-1", "이미 사용중인 아이디입니다.");
         });
@@ -33,10 +32,7 @@ public class MemberService {
         return memberRepository.findByUsername(username);
     }
 
-
-    public Optional<Member> findByApiKey (String apiKey) {
-        return memberRepository.findByUsername(apiKey);
+    public Optional<Member> findByApiKey(String apiKey) {
+        return memberRepository.findByApiKey(apiKey);
     }
-
-
 }

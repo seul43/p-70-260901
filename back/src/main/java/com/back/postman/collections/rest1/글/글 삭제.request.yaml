@@ -1,5 +1,5 @@
 $kind: http-request
 name: 글 삭제
-url: ""
+url: "{{baseUrl}}"
 method: DELETE
 order: 2207308104108675

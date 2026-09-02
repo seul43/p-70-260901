@@ -1,12 +1,15 @@
 $kind: http-request
 name: 글 작성
-url: http://localhost:8080/api/v1/posts
+url: "{{baseUrl}}/api/v1/posts"
 method: POST
+headers:
+  Authorization: "{{apiKey}}"
 body:
   type: json
   content: |-
     {
-      "title": "비밀번호test",
-      "content": "ㄴㄴㄴ"
+      "title": "똑똑",
+      "content": "사랑해요~",
+      "apiKey" : "{{apiKey}}"
     }
 order: 3506671095183381
