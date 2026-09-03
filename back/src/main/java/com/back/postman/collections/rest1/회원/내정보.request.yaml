@@ -1,0 +1,5 @@
+$kind: http-request
+name: 내정보
+url: "{{baseUrl}}/api/v1/members/me"
+method: GET
+order: 4348862175132868

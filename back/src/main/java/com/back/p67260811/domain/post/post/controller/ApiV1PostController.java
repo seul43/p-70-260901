@@ -3,10 +3,13 @@ package com.back.p67260811.domain.post.post.controller;
 import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.post.post.dto.PostDto;
 import com.back.p67260811.domain.post.post.entity.Post;
+import com.back.p67260811.domain.post.post.repository.PostRepository;
 import com.back.p67260811.domain.post.post.service.PostService;
 import com.back.p67260811.domain.member.service.MemberService;
 import com.back.p67260811.global.dto.RsData;
 import com.back.p67260811.global.exception.ServiceException;
+import com.back.p67260811.global.rq.Rq;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,6 +27,7 @@ public class ApiV1PostController {
 
     private final PostService postService;
     private final MemberService memberService;
+    private final Rq rq;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PostDto> list() {
@@ -62,15 +66,10 @@ public class ApiV1PostController {
     @PostMapping
     @Transactional
     public RsData<PostDto> write(
-        @Valid @RequestBody PostWriteReqBody reqBody,
-        @RequestHeader("Authorization") String apiKey
+        @Valid @RequestBody PostWriteReqBody reqBody
     ) {
 
-        String authorization = apiKey.substring(7);
-
-        Member actor = memberService.findByApiKey(apiKey).orElseThrow(
-            () -> new ServiceException("401-1","API Key가 유효하지 않습니다.")
-        );
+        Member actor = rq.getActor();
 
         Post post = postService.write(actor, reqBody.title, reqBody.content);
         return new RsData<>(
@@ -97,7 +96,13 @@ public class ApiV1PostController {
         @PathVariable int id,
         @Valid @RequestBody PostModifyReqBody reqBody
     ) {
+
+        Member actor = rq.getActor();
+
         Post post = postService.findById(id).get();
+
+        post.checkActorModify(actor);
+
         postService.modify(post, reqBody.title, reqBody.content);
 
         return new RsData<>(
@@ -110,6 +115,12 @@ public class ApiV1PostController {
     public RsData<Void> delete(
         @PathVariable int id
     ) {
+
+        Member actor = rq.getActor();
+
+        Post post = postService.findById(id).get();
+        post.checkActorDelete(actor);
+
         postService.delete(id);
 
         return new RsData<>(

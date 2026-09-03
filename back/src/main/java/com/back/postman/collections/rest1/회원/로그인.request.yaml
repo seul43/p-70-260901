@@ -6,7 +6,7 @@ body:
   type: json
   content: |-
     {
-        "username" : "new user",
+        "username" : "user3",
         "password" : "1234"
     }
 scripts:

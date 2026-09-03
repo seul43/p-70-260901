@@ -3,3 +3,9 @@ name: rest1
 variables:
   apiKey: ""
   baseUrl: ""
+auth:
+  - id: 6104eba1-615b-4adc-952c-5e3d8bf234db
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{apiKey}}"

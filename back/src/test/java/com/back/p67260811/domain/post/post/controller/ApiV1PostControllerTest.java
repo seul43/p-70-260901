@@ -70,6 +70,7 @@ public class ApiV1PostControllerTest {
             .perform(
                 post("/api/v1/posts")
                     .contentType(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Bearer user1")
                     .content("""
                                         {
                                             "title": "%s",
@@ -107,6 +108,7 @@ public class ApiV1PostControllerTest {
             .perform(
                 patch("/api/v1/posts/%d".formatted(targetId))
                     .contentType(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Bearer user1")
                     .content("""
                                         {
                                             "title": "%s",
@@ -168,6 +170,7 @@ public class ApiV1PostControllerTest {
         ResultActions resultActions = mvc
             .perform(
                 delete("/api/v1/posts/%d".formatted(targetId))
+                    .header("Authorization", "Bearer user1")
             )
             .andDo(print());
 
@@ -194,6 +197,7 @@ public class ApiV1PostControllerTest {
             .perform(
                 post("/api/v1/posts")
                     .contentType(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Bearer user1")
                     .content("""
                                         {
                                             "title": "%s",
@@ -224,6 +228,7 @@ public class ApiV1PostControllerTest {
             .perform(
                 post("/api/v1/posts")
                     .contentType(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Bearer user1")
                     .content("""
                                         {
                                             "title": "%s",
@@ -251,6 +256,7 @@ public class ApiV1PostControllerTest {
             .perform(
                 post("/api/v1/posts")
                     .contentType(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Bearer user1")
                     .content("""
                                         {
                                             "title": "%s"

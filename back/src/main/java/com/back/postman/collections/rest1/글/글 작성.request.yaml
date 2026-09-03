@@ -2,14 +2,16 @@ $kind: http-request
 name: 글 작성
 url: "{{baseUrl}}/api/v1/posts"
 method: POST
-headers:
-  Authorization: Bearer {{apiKey}}
 body:
   type: json
   content: |-
     {
-      "title": "똑똑",
-      "content": "사랑해요~",
+      "title": "아니요 전 뚱이에요",
+      "content": "아니요 뚱이라니까요",
       "apiKey" : "{{apiKey}}"
     }
+auth:
+  type: inherit
+  credentials:
+    id: 4a770913-da8a-456c-ab0b-c5b3b1ecb7c3
 order: 3506671095183381

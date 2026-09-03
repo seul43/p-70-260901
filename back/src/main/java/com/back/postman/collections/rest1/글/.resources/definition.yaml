@@ -1,3 +1,9 @@
 $kind: collection
 name: 글
+auth:
+  - id: 4a770913-da8a-456c-ab0b-c5b3b1ecb7c3
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{apiKey}}"
 order: 2548161959690239
