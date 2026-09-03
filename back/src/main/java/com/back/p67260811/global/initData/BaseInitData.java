@@ -62,5 +62,6 @@ public class BaseInitData {
         memberService.join("user1", "1234", "유저1", "user1");
         memberService.join("user2", "1234", "유저2", "user2");
         memberService.join("user3", "1234", "유저3", "user3");
+
     }
 }
