@@ -1,10 +1,12 @@
 package com.back.p67260811.domain.member;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import com.back.p67260811.domain.member.controller.ApiV1MemberController;
 import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.member.repository.MemberRepository;
+import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +133,18 @@ public class ApiV1MemberControllerTest {
             .andExpect(jsonPath("$.data.memberDto.createDate").exists())
             .andExpect(jsonPath("$.data.memberDto.modifyDate").exists())
             .andExpect(jsonPath("$.data.memberDto.name").value(member.getNickname()));
+
+        resultActions.andExpect(
+            result -> {
+                Cookie apiKeyCookie = result.getResponse().getCookie("apiKey");
+
+                assertThat(apiKeyCookie).isNotNull();
+
+                if(apiKeyCookie != null) {
+                    assertThat(apiKeyCookie.getValue()).isNotBlank();
+                }
+            }
+        );
 
     }
 }
