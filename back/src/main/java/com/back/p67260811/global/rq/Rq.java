@@ -3,7 +3,9 @@ package com.back.p67260811.global.rq;
 import com.back.p67260811.domain.member.entity.Member;
 import com.back.p67260811.domain.member.service.MemberService;
 import com.back.p67260811.global.exception.ServiceException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
@@ -17,6 +19,7 @@ public class Rq { //인증정보 등 반복되는 작업이 많으니 Rq라는 �
     private final HttpServletRequest request; //요청한 정보들이 쌓인다 리퀘스트 헤더&바디 등
     //Requestscope 타입이라 RQ가 싱글톤이어도 RequestScope를 가지고 있으면
     //내부가 프록시처럼 운영되어 객체가 여러개 생성된다
+    HttpServletResponse response;
 
     public Member getActor() {
 
@@ -38,5 +41,11 @@ public class Rq { //인증정보 등 반복되는 작업이 많으니 Rq라는 �
 
         //인증 됐고 정상적인 회원 정보 반환
         return actor;
+    }
+
+    public void addCookie(String name, String value) {
+        response.addCookie(
+            new Cookie(name, value)
+        );
     }
 }
