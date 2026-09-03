@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -103,6 +104,17 @@ public class ApiV1MemberController {
                 new MemberDto(actor),
                 actor.getApiKey()
             )
+        );
+    }
+
+    @DeleteMapping("/logout")
+    public RsData<Void> logout() {
+
+        rq.deleteCookie("apiKey");
+
+        return new RsData<>(
+            "200-1",
+            "로그아웃 되었습니다."
         );
     }
 

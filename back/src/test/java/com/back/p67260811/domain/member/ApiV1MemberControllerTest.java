@@ -46,12 +46,12 @@ public class ApiV1MemberControllerTest {
                 post("/api/v1/members/join")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
-                                        {
-                                            "username": "%s",
-                                            "password": "%s",
-                                            "nickname": "%s"
-                                        }
-                                        """.formatted(username, password, nickname)
+                        {
+                            "username": "%s",
+                            "password": "%s",
+                            "nickname": "%s"
+                        }
+                        """.formatted(username, password, nickname)
                     )
             )
             .andDo(print());
@@ -81,12 +81,12 @@ public class ApiV1MemberControllerTest {
                 post("/api/v1/members/join")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
-                                        {
-                                            "username": "%s",
-                                            "password": "%s",
-                                            "nickname": "%s"
-                                        }
-                                        """.formatted(username, password, nickname)
+                        {
+                            "username": "%s",
+                            "password": "%s",
+                            "nickname": "%s"
+                        }
+                        """.formatted(username, password, nickname)
                     )
             )
             .andDo(print());
@@ -111,11 +111,11 @@ public class ApiV1MemberControllerTest {
                 post("/api/v1/members/login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
-                                        {
-                                            "username": "%s",
-                                            "password": "%s"
-                                        }
-                                        """.formatted(username, password)
+                        {
+                            "username": "%s",
+                            "password": "%s"
+                        }
+                        """.formatted(username, password)
                     )
             )
             .andDo(print());
@@ -140,7 +140,7 @@ public class ApiV1MemberControllerTest {
 
                 assertThat(apiKeyCookie).isNotNull();
 
-                if(apiKeyCookie != null) {
+                if (apiKeyCookie != null) {
                     assertThat(apiKeyCookie.getValue()).isNotBlank();
                 }
 
@@ -151,4 +151,55 @@ public class ApiV1MemberControllerTest {
         );
 
     }
+
+    @Test
+    @DisplayName("내 정보")
+    void t4() throws Exception {
+        ResultActions resultActions = mvc
+            .perform(
+                delete("/api/v1/members/logout")
+            )
+            .andDo(print());
+
+        resultActions
+            .andExpect(handler().handlerType(ApiV1MemberController.class))
+            .andExpect(handler().methodName("logout"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.resultCode").value("200-1"))
+            .andExpect(jsonPath("$.msg").value("로그아웃 되었습니다."))
+            .andExpect(result -> {
+                Cookie apiKeyCookie = result.getResponse().getCookie("apiKey");
+                assertThat(apiKeyCookie.getValue()).isEmpty();
+                assertThat(apiKeyCookie.getMaxAge()).isEqualTo(0);
+                assertThat(apiKeyCookie.getPath()).isEqualTo("/");
+                assertThat(apiKeyCookie.isHttpOnly()).isTrue();
+            });
+    }
+
+    @Test
+    @DisplayName("로그아웃")
+    void t5() throws Exception {
+        ResultActions resultActions = mvc
+            .perform(
+                delete("/api/v1/members/logout")
+            )
+            .andDo(print());
+
+        resultActions
+            .andExpect(handler().handlerType(ApiV1MemberController.class))
+            .andExpect(handler().methodName("logout"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.resultCode").value("200-1"))
+            .andExpect(jsonPath("$.msg").value("로그아웃 되었습니다."))
+            .andExpect(result -> {
+                Cookie apiKeyCookie = result.getResponse().getCookie("apiKey");
+                assertThat(apiKeyCookie.getValue()).isEmpty();
+                assertThat(apiKeyCookie.getMaxAge()).isEqualTo(0);
+                assertThat(apiKeyCookie.getPath()).isEqualTo("/");
+                assertThat(apiKeyCookie.isHttpOnly()).isTrue();
+            });
+    }
+
+
+
 }
