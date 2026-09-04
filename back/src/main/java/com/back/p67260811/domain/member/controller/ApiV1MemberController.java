@@ -6,6 +6,7 @@ import com.back.p67260811.domain.member.service.MemberService;
 import com.back.p67260811.global.dto.RsData;
 import com.back.p67260811.global.exception.ServiceException;
 import com.back.p67260811.global.rq.Rq;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -120,6 +121,7 @@ public class ApiV1MemberController {
 
 
 
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/me")
     public RsData<MemberDto> me() {
 
